@@ -21,6 +21,15 @@
     type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
   <link href="../images/logosuper.png" rel="shortcut icon" type="image/x-icon">
   <link href="../images/logosuper.png" rel="apple-touch-icon">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: "R9_yVGHzilz1UHeAF",
+      });
+    })();
+  </script>
 </head>
 
 <body>
@@ -81,47 +90,75 @@
             for="name" class="field-label-9">Nome</label><input class="text-field-6 w-input" maxlength="256" name="name"
             data-name="Name" placeholder="Digite seu nome completo" type="text" id="name"><label for="email"
             class="field-label-10">Endereço</label><input class="text-field-7 w-input" maxlength="256" name="email"
-            data-name="Email" placeholder="Rua, Bairro e Número" type="email" id="email" required="">
+            data-name="Email" placeholder="Rua, Bairro e Número" type="endereco" id="endereco" required="">
           <div id="w-node-_5f60f7ce-051a-395b-4a91-94ebbe844b80-db6c3a99"
             class="w-layout-layout quick-stack-13 wf-layout-layout">
             <div id="w-node-_5f60f7ce-051a-395b-4a91-94ebbe844b81-db6c3a99" class="w-layout-cell cell-25"><label
                 for="email-2" class="field-label-11">Contato</label><input class="text-field-5 w-input" maxlength="256"
-                name="email-2" data-name="Email 2" placeholder="(_ _) _ _ _ _ _ - _ _ _ _" type="tel" id="email-2"
+                name="email-2" data-name="Email 2" placeholder="(_ _) _ _ _ _ _ - _ _ _ _" type="tel" id="telefone"
                 required=""></div>
             <div id="w-node-_5f60f7ce-051a-395b-4a91-94ebbe844b82-db6c3a99" class="w-layout-cell cell-23"><label
                 for="email-2" class="field-label-12">Data de nascimento</label><input class="text-field-5 w-input"
                 maxlength="256" name="email-2" data-name="Email 2" placeholder="_ _ / _ _ / _ _ _ _" type="tel"
-                id="email-2" required=""></div>
+                id="datanascimento" required=""></div>
           </div>
           <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff15d-db6c3a99"
             class="w-layout-layout quick-stack-13 wf-layout-layout">
-            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff15e-db6c3a99" class="w-layout-cell cell-24"><label
-                for="email-3" class="field-label-13">Estado Civil</label><label class="w-checkbox"><input
-                  type="checkbox" id="checkbox" name="checkbox" data-name="Checkbox" class="w-checkbox-input"><span
-                  class="checkbox-label-2 w-form-label" for="checkbox">Casada</span></label><label
-                class="w-checkbox"><input type="checkbox" id="checkbox-2" name="checkbox-2" data-name="Checkbox 2"
-                  class="w-checkbox-input"><span class="checkbox-label-3 w-form-label"
-                  for="checkbox-2">Solteira</span></label></div>
-            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff162-db6c3a99" class="w-layout-cell cell-22"><label
-                for="email-3" class="field-label-14">Filhos</label><label class="w-checkbox checkbox-field-3"><input
-                  type="checkbox" id="checkbox-3" name="checkbox-3" data-name="Checkbox 3"
-                  class="w-checkbox-input"><span class="checkbox-label-4 w-form-label"
-                  for="checkbox-3">Sim</span></label><label class="w-checkbox"><input type="checkbox" id="checkbox-3"
-                  name="checkbox-3" data-name="Checkbox 3" class="w-checkbox-input"><span
-                  class="checkbox-label-5 w-form-label" for="checkbox-3">Não</span></label><textarea
-                placeholder="Quantos Filhos?" maxlength="5000" id="Quantos-fihos" name="Quantos-fihos"
-                data-name="Quantos fihos?" class="textarea-2 w-input"></textarea></div>
+            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff15e-db6c3a99" class="w-layout-cell cell-24">
+              <label for="estado-civil" class="field-label-13">Estado Civil</label>
+
+              <label class="w-radio">
+                <input type="radio" id="casada" name="estadoCivil" value="Casada" class="w-radio-input">
+                <span class="radio-label w-form-label" for="casada">Casada</span>
+              </label>
+
+              <label class="w-radio">
+                <input type="radio" id="uniao-estavel" name="estadoCivil" value="União Estável" class="w-radio-input">
+                <span class="radio-label w-form-label" for="uniao-estavel">União Estável</span>
+              </label>
+
+              <label class="w-radio">
+                <input type="radio" id="solteira" name="estadoCivil" value="Solteira" class="w-radio-input">
+                <span class="radio-label w-form-label" for="solteira">Solteira</span>
+              </label>
+            </div>
+
+            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff162-db6c3a99" class="w-layout-cell cell-22">
+              <label for="filhos" class="field-label-14">Filhos</label>
+
+              <label class="w-radio">
+                <input type="radio" id="filhos-sim" name="filhos" value="Sim" class="w-radio-input">
+                <span class="radio-label w-form-label" for="filhos-sim">Sim</span>
+              </label>
+
+              <label class="w-radio">
+                <input type="radio" id="filhos-nao" name="filhos" value="Não" class="w-radio-input">
+                <span class="radio-label w-form-label" for="filhos-nao">Não</span>
+              </label>
+
+              <textarea placeholder="Quantos Filhos?" maxlength="5000" id="quantosfilhos" name="quantos-filhos"
+                data-name="Quantos filhos?" class="textarea-2 w-input"></textarea>
+            </div>
+
           </div>
           <div>
-            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff162-db6c3a99" class="w-layout-cell cell-22"><label
-                for="email-3" class="field-label-14">Possui conhecimento como diarista?</label><label
-                class="w-checkbox checkbox-field-3"><input type="checkbox" id="checkbox-3" name="checkbox-3"
-                  data-name="Checkbox 3" class="w-checkbox-input"><span class="checkbox-label-4 w-form-label"
-                  for="checkbox-3">Sim</span></label><label class="w-checkbox"><input type="checkbox" id="checkbox-3"
-                  name="checkbox-3" data-name="Checkbox 3" class="w-checkbox-input"><span
-                  class="checkbox-label-5 w-form-label" for="checkbox-3">Não</span></label><textarea
-                placeholder="Quantos tempo trabalha na área?" maxlength="5000" id="Quantos-fihos" name="Quantos-fihos"
-                data-name="Quantos tempo trabalha na área?" class="textarea-2 w-input"></textarea></div>
+            <div id="w-node-_5ec50a0c-52ee-4ac8-52d7-36652caff162-db6c3a99" class="w-layout-cell cell-22">
+              <label for="conhecimento-diarista" class="field-label-14">Possui conhecimento como diarista?</label>
+
+              <label class="w-radio">
+                <input type="radio" id="diarista-sim" name="conhecimentoDiarista" value="Sim" class="w-radio-input">
+                <span class="radio-label w-form-label" for="diarista-sim">Sim</span>
+              </label>
+
+              <label class="w-radio">
+                <input type="radio" id="diarista-nao" name="conhecimentoDiarista" value="Não" class="w-radio-input">
+                <span class="radio-label w-form-label" for="diarista-nao">Não</span>
+              </label>
+
+              <textarea placeholder="Quanto tempo trabalha na área?" maxlength="5000" id="tempodiarista"
+                name="tempo-diarista" data-name="Quanto tempo trabalha na área?" class="textarea-2 w-input"></textarea>
+            </div>
+
           </div>
           <div class="w-layout-blockcontainer container-40 w-container">
             <button type="submit" class="button w-button">Enviar</button>
