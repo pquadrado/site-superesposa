@@ -68,31 +68,25 @@ Webflow.require('ix2').init(
 let frequenciaSelecionada = "";
 let localSelecionado = "";
 
-// Seleção de frequência
 document.querySelectorAll("#frequencia-container .button-2").forEach(button => {
   button.addEventListener("click", function (event) {
     event.preventDefault();
-    // Remover 'active' de todos os botões e adicionar apenas ao clicado
     document.querySelectorAll("#frequencia-container .button-2").forEach(btn => btn.classList.remove("active"));
     this.classList.add("active");
     frequenciaSelecionada = this.getAttribute("data-frequencia");
   });
 });
 
-// Seleção de local
 document.querySelectorAll("#local-container .button-2").forEach(button => {
   button.addEventListener("click", function (event) {
     event.preventDefault();
-    // Remover 'active' de todos os botões e adicionar apenas ao clicado
     document.querySelectorAll("#local-container .button-2").forEach(btn => btn.classList.remove("active"));
     this.classList.add("active");
     localSelecionado = this.getAttribute("data-local");
   });
 });
 
-// Ação do botão "Cotar agora"
-document.getElementById("cotarAgora").addEventListener("click", function (event) {
-  event.preventDefault();
+function cotarAgora() {
   if (frequenciaSelecionada && localSelecionado) {
     const mensagem = `Eu vim do site e quero um orçamento: ${frequenciaSelecionada} para ${localSelecionado}`;
     const urlWhatsApp = `https://wa.me/5516996276515?text=${encodeURIComponent(mensagem)}`;
@@ -100,71 +94,134 @@ document.getElementById("cotarAgora").addEventListener("click", function (event)
   } else {
     alert("Por favor, selecione a quantidade de limpeza e o local.");
   }
-});
+}
 
-
-document.getElementById("button-4-horas").addEventListener("click", function (event) {
-  event.preventDefault()
+function limpeza4horas() {
   const mensagem = "Eu vim pelo site e quero um orçamento para uma limpeza de 4 horas"
   const urlWhatsApp = `https://wa.me/5516996276515?text=${encodeURIComponent(mensagem)}`
   window.open(urlWhatsApp, "_blank")
-})
+}
 
-document.getElementById("button-6-horas").addEventListener("click", function (event) {
-  event.preventDefault()
+function limpeza6horas() {
   const mensagem = "Eu vim pelo site e quero um orçamento para uma limpeza de 6 horas"
   const urlWhatsApp = `https://wa.me/5516996276515?text=${encodeURIComponent(mensagem)}`
   window.open(urlWhatsApp, "_blank")
-})
+}
 
-document.getElementById("button-8-horas").addEventListener("click", function (event) {
-  event.preventDefault()
+function limpeza8horas() {
   const mensagem = "Eu vim pelo site e quero um orçamento para uma limpeza de 8 horas"
   const urlWhatsApp = `https://wa.me/5516996276515?text=${encodeURIComponent(mensagem)}`
   window.open(urlWhatsApp, "_blank")
-})
+}
+
+// Configuração do formulário Planos Fixos
+
+let dadosDoImovel
+let tipoSelecionado
+let servicoSelecionado
+let horaSelecionada
+let frequenciaSelecionadas
+let semanaSelecionada
+let horarioSemanaSelecionada
+let qtdDiaristas
+let formaDePagamento
+
+document.addEventListener('DOMContentLoaded', function () {
+  const radioButtons = document.querySelectorAll('input[name="property-category"]');
+  radioButtons.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      dadosDoImovel = this.value;
+    });
+  });
+
+  const radioButtons2 = document.querySelectorAll('input[name="property-type"]');
+  radioButtons2.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      tipoSelecionado = this.value
+    });
+  });
+
+  const serviceRadios = document.querySelectorAll('input[name="service"]');
+  serviceRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      servicoSelecionado = this.value
+    });
+  });
+
+  const frequencyRadios = document.querySelectorAll('input[name="frequency"]');
+  frequencyRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      frequenciaSelecionadas = this.value
+    });
+  });
+
+  const hoursRadios = document.querySelectorAll('input[name="attendance-hours"]');
+  hoursRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      horaSelecionada = this.value
+    });
+  });
+
+  const dayRadios = document.querySelectorAll('input[name="day-of-week"]');
+
+  dayRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      semanaSelecionada = this.value
+    });
+  });
+
+  const timeRadios = document.querySelectorAll('input[name="attendance-time"]');
+
+  timeRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      horarioSemanaSelecionada = this.value
+    });
+  });
 
 
-// Configuração do formulários
+  const diaristRadios = document.querySelectorAll('input[name="number-of-diarists"]');
 
-let estadoCivilSelecionado
-let filhosSelecionado
-let conhecimentoDiarista
+  diaristRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      qtdDiaristas = this.value
+    });
+  });
 
-document.querySelectorAll('input[name="estadoCivil"]').forEach((radio) => {
-  radio.addEventListener('change', function () {
-    estadoCivilSelecionado = this.value;
+  const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
+
+  paymentRadios.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      formaDePagamento = this.value
+    });
   });
 });
 
-document.querySelectorAll('input[name="filhos"]').forEach((radio) => {
-  radio.addEventListener('change', function () {
-    filhosSelecionado = this.value;
-  });
-});
 
-document.querySelectorAll('input[name="conhecimentoDiarista"]').forEach((radio) => {
-  radio.addEventListener('change', function () {
-    conhecimentoDiarista = this.value;
-  });
-});
-
-
-function sendEmailTrabalheConosco() {
+function sendEmailPlanosFixos() {
   const params = {
+    email: document.getElementById("email").value,
     name: document.getElementById("name").value,
-    endereco: document.getElementById("endereco").value,
-    contato: document.getElementById("telefone").value,
-    data_nascimento: document.getElementById("datanascimento").value,
-    civil: estadoCivilSelecionado,
-    filhos: filhosSelecionado,
-    quantidade: document.getElementById("quantosfilhos").value,
-    diarista: conhecimentoDiarista,
-    tempo_diarista: document.getElementById("tempo_diarista").value
+    cpf: document.getElementById("cpf").value,
+    local_limpeza: document.getElementById("locallimpeza").value,
+    ponto: document.getElementById("ponto").value,
+    fone: document.getElementById("fone").value,
+    whatsapp: document.getElementById("cell").value,
+    dados_imovel: dadosDoImovel,
+    tipo: tipoSelecionado,
+    servico: servicoSelecionado,
+    horas: horaSelecionada,
+    frequencia: frequenciaSelecionadas,
+    semana: semanaSelecionada,
+    horario_atendimento: horarioSemanaSelecionada,
+    horario_atendimento2: document.getElementById("outrohorario").value,
+    diaristas_atendimento: qtdDiaristas,
+    pagamento: formaDePagamento,
+    data_inicio: document.getElementById("datapagamento").value,
+    informacoes_relevantes: document.getElementById("informacoesrele").value,
   }
 
   const serviceId = "service_t4cb82l"
-  const templateId = "template_n4sp1zr"
+  const templateId = "template_fnw1mzt"
 
   emailjs.send(serviceId, templateId, params).then(
     (res) => {
@@ -173,7 +230,14 @@ function sendEmailTrabalheConosco() {
   ).catch((err) => console.log(err))
 }
 
-document.getElementById("email-form").addEventListener("submit", function (event) {
-  event.preventDefault()
-  sendEmail()
-})
+
+
+document.getElementById("emailforms").addEventListener("submit", function (event) {
+  event.preventDefault();
+  const termsCheckbox = document.getElementById('terms');
+  if (termsCheckbox.checked) {
+    sendEmailPlanosFixos();
+  } else {
+    alert("Concorde com os termos")
+  }
+});
